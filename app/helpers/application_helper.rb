@@ -16,8 +16,8 @@ module ApplicationHelper
 
   #----------------------------------------------------------------------------
   def tabless_layout?
-    %w(authentications passwords).include?(controller.controller_name) ||
-      ((controller.controller_name == "users") && (%w(create new).include?(controller.action_name)))
+    %w(authentications passwords).include?(controller.controller_path) ||
+      ((controller.controller_path == "users") && (%w(create new).include?(controller.action_name)))
   end
 
   # Show existing flash or embed hidden paragraph ready for flash[:notice]
@@ -37,7 +37,7 @@ module ApplicationHelper
   def subtitle(id, hidden = true, text = id.to_s.split("_").last.capitalize)
     content_tag("div",
                 link_to("<small>#{ hidden ? '&#9658;' : '&#9660;' }</small> #{sanitize text}".html_safe,
-                        url_for(controller: :home, action: :toggle, id: id),
+                        url_for(controller: '/home', action: :toggle, id: id),
                         remote: true,
                         onclick: "crm.flip_subtitle(this)"
                 ), class: "subtitle")
@@ -237,7 +237,7 @@ module ApplicationHelper
   # Reresh sidebar using the action view within the current controller.
   #----------------------------------------------------------------------------
   def refresh_sidebar(action = nil, shake = nil)
-    refresh_sidebar_for(controller.controller_name, action, shake)
+    refresh_sidebar_for(controller.controller_path, action, shake)
   end
 
   # Refresh sidebar using the action view within an arbitrary controller.
@@ -267,7 +267,7 @@ module ApplicationHelper
 
   # Ajax helper to refresh current index page once the user selects an option.
   #----------------------------------------------------------------------------
-  def redraw(option, value, url = send("redraw_#{controller.controller_name}_path"))
+  def redraw(option, value, url = url_for(controller: controller.controller_path, action: :redraw, only_path: true))
     if value.is_a?(Array)
       param, value = value.first, value.last
     end
@@ -283,7 +283,7 @@ module ApplicationHelper
   end
 
   #----------------------------------------------------------------------------
-  def options_menu_item(option, key, url = send("redraw_#{controller.controller_name}_path"))
+  def options_menu_item(option, key, url = url_for(controller: controller.controller_path, action: :redraw, only_path: true))
     name = t("option_#{key}")
     "{ name: \"#{name.titleize}\", on_select: function() {" +
       %{
@@ -395,7 +395,7 @@ module ApplicationHelper
   end
 
   def entity_filter_checkbox(name, value, count)
-    checked = (session["#{controller_name}_filter"].present? ? session["#{controller_name}_filter"].split(",").include?(value.to_s) : count.to_i > 0)
+    checked = (session["#{controller_path}_filter"].present? ? session["#{controller_path}_filter"].split(",").include?(value.to_s) : count.to_i > 0)
     url = url_for(action: :filter)
     onclick = %{
       var query = $('#query').val(),
