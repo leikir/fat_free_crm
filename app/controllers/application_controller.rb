@@ -79,7 +79,7 @@ class ApplicationController < ActionController::Base
 
   #----------------------------------------------------------------------------
   def klass
-    @klass ||= controller_path.classify.constantize
+    @klass ||= controller_name.classify.constantize
   end
 
   #----------------------------------------------------------------------------

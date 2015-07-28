@@ -16,8 +16,8 @@ module ApplicationHelper
 
   #----------------------------------------------------------------------------
   def tabless_layout?
-    %w(authentications passwords).include?(controller.controller_path) ||
-      ((controller.controller_path == "users") && (%w(create new).include?(controller.action_name)))
+    %w(authentications passwords).include?(controller.controller_name) ||
+      ((controller.controller_name == "users") && (%w(create new).include?(controller.action_name)))
   end
 
   # Show existing flash or embed hidden paragraph ready for flash[:notice]
@@ -44,6 +44,21 @@ module ApplicationHelper
   end
 
   #----------------------------------------------------------------------------
+  def dom_class_with_namespace(record_or_class, prefix = nil)
+    singular = model_name_from_record_or_class(record_or_class).i18n_key.to_s
+    prefix ? "#{prefix}#{ActionView::RecordIdentifier::JOIN}#{singular}" : singular
+  end
+
+  #----------------------------------------------------------------------------
+  def dom_id_with_namespace(record, prefix = nil)
+    if record_id = record_key_for_dom_id(record)
+      "#{dom_class_with_namespace(record, prefix)}#{ActionView::RecordIdentifier::JOIN}#{record_id}"
+    else
+      dom_class_with_namespace(record, prefix || ActionView::RecordIdentifier::NEW)
+    end
+  end
+
+  #----------------------------------------------------------------------------
   def section(related, assets)
     asset = assets.to_s.singularize
     create_id  = "create_#{asset}"
@@ -53,7 +68,7 @@ module ApplicationHelper
     html = tag(:br)
     html << content_tag(:div, link_to(t(select_id), "#", id: select_id), class: "subtitle_tools")
     html << content_tag(:div, "&nbsp;|&nbsp;".html_safe, class: "subtitle_tools")
-    html << content_tag(:div, link_to_inline(create_id, create_url, related: dom_id(related), text: t(create_id)), class: "subtitle_tools")
+    html << content_tag(:div, link_to_inline(create_id, create_url, related: dom_id_with_namespace(related), text: t(create_id)), class: "subtitle_tools")
     html << content_tag(:div, t(assets), class: :subtitle, id: "create_#{asset}_title")
     html << content_tag(:div, "", class: :remote, id: create_id, style: "display:none;")
   end
@@ -128,7 +143,8 @@ module ApplicationHelper
   #----------------------------------------------------------------------------
   def link_to_discard(object)
     current_url = (request.xhr? ? request.referer : request.fullpath)
-    parent, parent_id = current_url.scan(%r{/(\w+)/(\d+)}).flatten
+    current_url_params = Rails.application.routes.recognize_path(current_url)
+    parent, parent_id = current_url_params[:controller], current_url_params[:id]
 
     link_to(t(:discard),
             url_for(controller: parent, action: :discard, id: parent_id, attachment: object.class.name, attachment_id: object.id),
@@ -395,7 +411,7 @@ module ApplicationHelper
   end
 
   def entity_filter_checkbox(name, value, count)
-    checked = (session["#{controller_path}_filter"].present? ? session["#{controller_path}_filter"].split(",").include?(value.to_s) : count.to_i > 0)
+    checked = (session["#{controller_name}_filter"].present? ? session["#{controller_name}_filter"].split(",").include?(value.to_s) : count.to_i > 0)
     url = url_for(action: :filter)
     onclick = %{
       var query = $('#query').val(),
