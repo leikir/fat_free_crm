@@ -1,7 +1,7 @@
 - if (template = template_for_current_view)
   = render(template, :account => @account)
 - else
-  
+
   -# default view
 
   = styles_for :task, :contact, :opportunity
@@ -24,3 +24,5 @@
     = render "versions/versions", :object => @account
 
     = load_select_popups_for(@account, :tasks, :contacts, :opportunities)
+
+  = hook(:show_account_after, self, :account => @account)
