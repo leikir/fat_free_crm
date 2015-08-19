@@ -7,8 +7,11 @@
   = styles_for :task
 
   = render 'leads/title_bar', :lead => @lead
-  
+
+  = hook(:show_lead_title_after, self, :lead => @lead)
+
   = render "comments/new", :commentable => @lead
+
   = render :partial => "shared/timeline", :collection => @timeline
 
   = hook(:show_lead_bottom, self, {entity: @lead}) do
@@ -18,3 +21,5 @@
     = render :partial => "versions/versions", :locals => {:object => @lead}
 
     = load_select_popups_for(@lead, :tasks)
+
+  = hook(:show_lead_after, self, :lead => @lead)
