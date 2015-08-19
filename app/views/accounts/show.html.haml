@@ -8,6 +8,8 @@
 
   = render 'accounts/title_bar', :account => @account
 
+  = hook(:show_account_title_after, self, :account => @account)
+
   %div#edit_account{ hidden }
 
   = render "comments/new", :commentable => @account
