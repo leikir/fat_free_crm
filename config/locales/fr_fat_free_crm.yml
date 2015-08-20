@@ -218,8 +218,7 @@ fr:
   # Options.
   #----------------------------------------------------------------------------
   option_amount*probability: Montant pondéré
-  activity_options: Voir les %{action_type} %{models} effectuées par %{user} dans
-    les derniers %{period}.
+  activity_options: Voir les %{action_type} de type %{models} effectuées par %{user} depuis %{period}.
   all_users: tous les utilisateurs
   option_after: après
   option_all: tous
@@ -597,16 +596,21 @@ fr:
   back: Retour
   cancel: Annuler
   close_form: Fermer le formulaire
+  comment_intro: Vous pouvez rajouter des commentaires plus tard.
   confirm_delete: ! 'Êtes-vous certain de vouloir supprimer ceci : %{value}?'
   copy_permissions: Copier les permissions de %{value}
   could_not_find: ! 'Aucun(e) %{value} n''a été trouvé(e). N''hésitez pas à '
   could_not_find_matching: Aucun(e) %{value} n'a été trouvé(e) correspondant à
-  create_new: créer un(e)
-  create_a_new: créer un(e)
-  select_existing: sélectionnez un(e)
-  delete: Supprimer
-  discard: Abandonner
-  edit: Modifier
+  create_new: créer
+  create_a_new: créer
+  select_existing: sélectionnez
+  delete: Suppression
+  discard: Abandon
+  edit: Modification
+  update: Mise à jour
+  destroy: Suppression
+  view: Consultation
+  create: Création
   items_total: ! '%{count} total.'
   less: Moins...
   me: moi
@@ -670,7 +674,7 @@ fr:
   comment: Commentaire
   edit_comment: Modifier le commentaire
   show: Voir
-  update: Modifier
+  update: Modification
   following_users_will_be_notified: Les utilisateurs suivants seront notifiés par email
   notifications_tooltip: Les utilisateurs abonnés recevront les nouveaux commentaires par email
   subscribe_via_email: S'abonner par email

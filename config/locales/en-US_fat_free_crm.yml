@@ -611,6 +611,7 @@ en-US:
   delete: Delete
   discard: Discard
   edit: Edit
+  create: Create
   items_total: ! '%{count} total.'
   less: Less...
   me: me
