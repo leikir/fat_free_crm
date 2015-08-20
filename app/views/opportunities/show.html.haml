@@ -8,7 +8,10 @@
 
   = render 'opportunities/title_bar', :opportunity => @opportunity
 
+  = hook(:show_opportunity_title_after, self, :opportunity => @opportunity)
+
   = render "comments/new", :commentable => @opportunity
+
   = render :partial => "shared/timeline", :collection => @timeline
 
   = hook(:show_opportunity_bottom, self, {entity: @opportunity}) do
@@ -20,3 +23,5 @@
     = render "versions/versions", :object => @opportunity
 
     = load_select_popups_for(@opportunity, :tasks, :contacts)
+
+  = hook(:show_opportunity_after, self, :opportunity => @opportunity)

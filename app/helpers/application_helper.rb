@@ -37,10 +37,25 @@ module ApplicationHelper
   def subtitle(id, hidden = true, text = id.to_s.split("_").last.capitalize)
     content_tag("div",
                 link_to("<small>#{ hidden ? '&#9658;' : '&#9660;' }</small> #{sanitize text}".html_safe,
-                        url_for(controller: :home, action: :toggle, id: id),
+                        url_for(controller: '/home', action: :toggle, id: id),
                         remote: true,
                         onclick: "crm.flip_subtitle(this)"
                 ), class: "subtitle")
+  end
+
+  #----------------------------------------------------------------------------
+  def dom_class_with_namespace(record_or_class, prefix = nil)
+    singular = model_name_from_record_or_class(record_or_class).i18n_key.to_s
+    prefix ? "#{prefix}#{ActionView::RecordIdentifier::JOIN}#{singular}" : singular
+  end
+
+  #----------------------------------------------------------------------------
+  def dom_id_with_namespace(record, prefix = nil)
+    if record_id = record_key_for_dom_id(record)
+      "#{dom_class_with_namespace(record, prefix)}#{ActionView::RecordIdentifier::JOIN}#{record_id}"
+    else
+      dom_class_with_namespace(record, prefix || ActionView::RecordIdentifier::NEW)
+    end
   end
 
   #----------------------------------------------------------------------------
@@ -53,7 +68,7 @@ module ApplicationHelper
     html = tag(:br)
     html << content_tag(:div, link_to(t(select_id), "#", id: select_id), class: "subtitle_tools")
     html << content_tag(:div, "&nbsp;|&nbsp;".html_safe, class: "subtitle_tools")
-    html << content_tag(:div, link_to_inline(create_id, create_url, related: dom_id(related), text: t(create_id)), class: "subtitle_tools")
+    html << content_tag(:div, link_to_inline(create_id, create_url, related: dom_id_with_namespace(related), text: t(create_id)), class: "subtitle_tools")
     html << content_tag(:div, t(assets), class: :subtitle, id: "create_#{asset}_title")
     html << content_tag(:div, "", class: :remote, id: create_id, style: "display:none;")
   end
@@ -128,7 +143,8 @@ module ApplicationHelper
   #----------------------------------------------------------------------------
   def link_to_discard(object)
     current_url = (request.xhr? ? request.referer : request.fullpath)
-    parent, parent_id = current_url.scan(%r{/(\w+)/(\d+)}).flatten
+    current_url_params = Rails.application.routes.recognize_path(current_url)
+    parent, parent_id = current_url_params[:controller], current_url_params[:id]
 
     link_to(t(:discard),
             url_for(controller: parent, action: :discard, id: parent_id, attachment: object.class.name, attachment_id: object.id),
@@ -237,7 +253,7 @@ module ApplicationHelper
   # Reresh sidebar using the action view within the current controller.
   #----------------------------------------------------------------------------
   def refresh_sidebar(action = nil, shake = nil)
-    refresh_sidebar_for(controller.controller_name, action, shake)
+    refresh_sidebar_for(controller.controller_path, action, shake)
   end
 
   # Refresh sidebar using the action view within an arbitrary controller.
@@ -267,7 +283,7 @@ module ApplicationHelper
 
   # Ajax helper to refresh current index page once the user selects an option.
   #----------------------------------------------------------------------------
-  def redraw(option, value, url = send("redraw_#{controller.controller_name}_path"))
+  def redraw(option, value, url = url_for(controller: controller.controller_path, action: :redraw, only_path: true))
     if value.is_a?(Array)
       param, value = value.first, value.last
     end
@@ -283,7 +299,7 @@ module ApplicationHelper
   end
 
   #----------------------------------------------------------------------------
-  def options_menu_item(option, key, url = send("redraw_#{controller.controller_name}_path"))
+  def options_menu_item(option, key, url = url_for(controller: controller.controller_path, action: :redraw, only_path: true))
     name = t("option_#{key}")
     "{ name: \"#{name.titleize}\", on_select: function() {" +
       %{

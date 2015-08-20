@@ -114,7 +114,6 @@ class EntitiesController < ApplicationController
 
   def set_options
     unless params[:cancel].true?
-      klass = controller_name.classify.constantize
       @per_page = current_user.pref[:"#{controller_name}_per_page"] || klass.per_page
       @sort_by  = current_user.pref[:"#{controller_name}_sort_by"]  || klass.sort_by
     end
@@ -125,6 +124,11 @@ class EntitiesController < ApplicationController
   end
 
   private
+
+  #----------------------------------------------------------------------------
+  def klass
+    @klass ||= controller_path.classify.constantize
+  end
 
   def ransack_search
     @ransack_search ||= load_ransack_search
