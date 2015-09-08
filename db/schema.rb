@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150427131956) do
+ActiveRecord::Schema.define(version: 20150904131159) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -205,14 +205,15 @@ ActiveRecord::Schema.define(version: 20150427131956) do
   add_index "emails", ["mediator_id", "mediator_type"], name: "index_emails_on_mediator_id_and_mediator_type", using: :btree
 
   create_table "field_groups", force: :cascade do |t|
-    t.string   "name",       limit: 64
-    t.string   "label",      limit: 128
+    t.string   "name",         limit: 64
+    t.string   "label",        limit: 128
     t.integer  "position"
     t.string   "hint"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "tag_id"
-    t.string   "klass_name", limit: 32
+    t.string   "klass_name",   limit: 32
+    t.string   "category_key"
   end
 
   create_table "fields", force: :cascade do |t|
