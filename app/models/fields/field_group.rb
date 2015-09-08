@@ -41,6 +41,10 @@ class FieldGroup < ActiveRecord::Base
     where 'tag_id IS NULL OR tag_id IN (?)', tag_ids
   end
 
+  def self.with_categories(categories)
+    where "category_key IS NULL OR category_key IN (?)", categories
+  end
+
   def label_i18n
     I18n.t(name, default: label)
   end
