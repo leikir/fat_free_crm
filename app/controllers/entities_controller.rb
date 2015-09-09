@@ -82,9 +82,9 @@ class EntitiesController < ApplicationController
   #----------------------------------------------------------------------------
   def field_group
     if @tag = Tag.find_by_name(params[:tag].strip)
-      if @field_group = FieldGroup.find_by_tag_id_and_klass_name(@tag.id, klass.to_s)
+      if @field_group = FieldGroup.where("tag_id = ? AND klass_name = ?",@tag.id, klass.to_s)
         @asset = klass.find_by_id(params[:asset_id]) || klass.new
-        render('fields/group') && return
+        render('fields/groups') && return
       end
     end
     render text: ''
