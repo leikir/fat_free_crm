@@ -89,9 +89,10 @@ class EntitiesController < ApplicationController
       end
     end
     if params[:category]
-      if @field_group = FieldGroup.find_by_category_key(params[:category])
+      @field_groups = FieldGroup.where(category_key: params[:category]).to_a
+      if @field_groups.any?
         @asset = klass.find_by_id(params[:asset_id]) || klass.new
-        render('fields/group') && return
+        render('fields/groups') && return
       end
     end
     render text: ''
