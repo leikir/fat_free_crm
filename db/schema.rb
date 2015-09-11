@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150227123054) do
+ActiveRecord::Schema.define(version: 20150904131159) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "account_contacts", force: :cascade do |t|
     t.integer  "account_id"
@@ -204,14 +205,15 @@ ActiveRecord::Schema.define(version: 20150227123054) do
   add_index "emails", ["mediator_id", "mediator_type"], name: "index_emails_on_mediator_id_and_mediator_type", using: :btree
 
   create_table "field_groups", force: :cascade do |t|
-    t.string   "name",       limit: 64
-    t.string   "label",      limit: 128
+    t.string   "name",         limit: 64
+    t.string   "label",        limit: 128
     t.integer  "position"
     t.string   "hint"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "tag_id"
-    t.string   "klass_name", limit: 32
+    t.string   "klass_name",   limit: 32
+    t.string   "category_key"
   end
 
   create_table "fields", force: :cascade do |t|
@@ -451,6 +453,7 @@ ActiveRecord::Schema.define(version: 20150227123054) do
 
   add_index "versions", ["created_at"], name: "index_versions_on_created_at", using: :btree
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
+  add_index "versions", ["related_id", "related_type"], name: "index_versions_on_related_id_and_related_type", using: :btree
   add_index "versions", ["transaction_id"], name: "index_versions_on_transaction_id", using: :btree
   add_index "versions", ["whodunnit"], name: "index_versions_on_whodunnit", using: :btree
 

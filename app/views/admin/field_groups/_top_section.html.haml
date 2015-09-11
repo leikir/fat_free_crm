@@ -12,3 +12,9 @@
           =t(:restrict_by_tag)
           %small= t(:restrict_by_tag_info, :assets => f.object.klass_name.downcase.pluralize)
         = f.select :tag_id, Tag.all.map { |tag| [tag.name, tag.id] }, :include_blank => true
+      - if f.object.klass_name.downcase == 'account'
+        %td
+          .label.top
+            =t(:restrict_by_user_category)
+            %small= t(:restrict_by_category_info)
+          = f.select :category_key, Setting.unroll(:account_category), :include_blank => true
