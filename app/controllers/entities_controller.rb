@@ -81,10 +81,20 @@ class EntitiesController < ApplicationController
 
   #----------------------------------------------------------------------------
   def field_group
-    if params[:tag] && @tag = Tag.find_by_name(params[:tag].strip)
-      @field_groups = FieldGroup.where(tag_id: @tag.id, klass_name: klass.to_s).to_a
-    elsif params[:category]
-      @field_groups = FieldGroup.where(category_key: params[:category], klass_name: klass.to_s).to_a
+    @field_groups = FieldGroup.where(klass_name: klass.to_s)
+    tags = [params[:tag]].flatten.map do |tag_name|
+      if tag_name.blank?
+        nil
+      else
+        Tag.find_by_name(tag_name.strip)
+      end
+    end
+    tags.compact!
+    if tags.any?
+      @field_groups = @field_groups.where(tag_id: tags.map(&:id))
+    end
+    if params[:category]
+      @field_groups = @field_groups.where(category_key: ['', params[:category]])
     end
     if @field_groups.any?
       @asset = klass.find_by_id(params[:asset_id]) || klass.new

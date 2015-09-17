@@ -18,6 +18,7 @@
     asset_id = $(this).data('asset-id')
     $.get(url, {
       category: new_value
+      tag: $(this).closest('form').find("[name*='tag_list']").select2('val')
       asset_id: asset_id
       collapsed: "no"
     })

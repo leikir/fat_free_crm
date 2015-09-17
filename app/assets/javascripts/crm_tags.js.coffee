@@ -12,6 +12,7 @@
     asset_id = $(this).data('asset-id')
     $.get(url, {
       tag: event.val
+      category: $(this).closest('form').find("[name='account[category]']").val()
       asset_id: asset_id
       collapsed: "no"
     })
