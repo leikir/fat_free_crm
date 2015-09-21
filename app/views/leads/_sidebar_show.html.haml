@@ -63,3 +63,5 @@
       .tags= tags_for_index(@lead)
 
   = hook(:show_lead_sidebar_bottom, self, :lead => @lead)
+
+= hook(:show_lead_sidebar_after, self, :lead => @lead)
