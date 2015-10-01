@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 
   resources :accounts, id: /\d+/ do
     collection do
-      get :advanced_search
+      match :advanced_search, to: 'accounts#index', via: [:get, :post]
       post :filter
       get :options
       get :field_group
@@ -48,7 +48,7 @@ Rails.application.routes.draw do
 
   resources :campaigns, id: /\d+/ do
     collection do
-      get :advanced_search
+      match :advanced_search, to: 'campaigns#index', via: [:get, :post]
       post :filter
       get :options
       get :field_group
@@ -68,7 +68,7 @@ Rails.application.routes.draw do
 
   resources :contacts, id: /\d+/ do
     collection do
-      get :advanced_search
+      match :advanced_search, to: 'contacts#index', via: [:get, :post]
       post :filter
       get :options
       get :field_group
@@ -87,7 +87,7 @@ Rails.application.routes.draw do
 
   resources :leads, id: /\d+/ do
     collection do
-      get :advanced_search
+      match :advanced_search, to: 'leads#index', via: [:get, :post]
       post :filter
       get :options
       get :field_group
@@ -109,7 +109,7 @@ Rails.application.routes.draw do
 
   resources :opportunities, id: /\d+/ do
     collection do
-      get :advanced_search
+      match :advanced_search, to: 'opportunities#index', via: [:get, :post]
       post :filter
       get :options
       get :field_group
