@@ -583,6 +583,8 @@ fr:
   my_opportunities: Mes opportunités
   no_opportunity_records: Vous n'avez pas d'opportunité.
   my_accounts: Mes comptes
+  my_leads: Mes leads
+  no_lead_records: Vous n'avez pas de lead.
   no_account_records: Vous n'avez pas de compte.
   not_showing_hidden_entities: ! '%{count} %{entity} cachées.'
 
