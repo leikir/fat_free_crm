@@ -417,7 +417,7 @@ DEPENDENCIES
   rspec-rails
   sass
   sass-rails
-  select2-rails
+  select2-rails (~> 3.5)
   selenium-webdriver
   simple_form
   sprockets-rails (= 2.2.2)
