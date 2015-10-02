@@ -715,7 +715,7 @@ fr:
     référencent encore ce groupe.
   approve: Approuver
   create_user: Créer un utilisateur
-  last_logged_in: last logged in %{value}
+  last_logged_in: dernière connexion %{value}
   personal_information: Informations complémentaires
   reactivate: Réactiver
   save_user: Enregistrer l'utilisateur
