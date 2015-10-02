@@ -630,6 +630,7 @@ fr:
   select_lead: Choisir une piste
   select_task: Choisir une tâche
   select_opportunity: Choisir une opportunité
+  search: Rechercher
   search_assets: Recherche de %{value}
   time_ago: il y a %{value}
   background_info: Informations
@@ -717,6 +718,7 @@ fr:
   create_user: Créer un utilisateur
   last_logged_in: dernière connexion %{value}
   personal_information: Informations complémentaires
+  group_memberships: Groupes
   reactivate: Réactiver
   save_user: Enregistrer l'utilisateur
   suspend: Suspendre

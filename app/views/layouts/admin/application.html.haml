@@ -11,6 +11,9 @@
     = javascript_include_tag :application
     = hook(:javascript_includes, self) {}
 
+    :javascript
+      crm.language = "#{I18n.locale}"
+
     %script{:type => "text/javascript"}= yield :javascript
     = csrf_meta_tag
 
