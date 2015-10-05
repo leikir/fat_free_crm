@@ -15,12 +15,12 @@
       %table
         %tr
           %td
-            .label.top.req Field label:
+            .label.top.req= t(:field_label)
             = f.text_field :label, :id => nil
 
           %td= spacer
           %td
-            .label.top.req Field type:
+            .label.top.req= t(:field_type)
             = select :field, :as, field_edit_as_options(@field), :include_blank => true, :id => nil
 
       .subform
@@ -31,5 +31,5 @@
         = f.submit t(:create_field), :id => :field_submit
       - else
         = f.submit t(:save_field), :id => :field_submit
-      or
+      = t :or
       = link_to( t(:cancel), '#', :class => 'cancel' )

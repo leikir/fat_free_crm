@@ -160,6 +160,11 @@ en-GB:
           required: ^%{field} is required.
           maxlength: ^%{field} is too long.
           endbeforestart: ^%{field} cannot end before it begins.
+          field_label_error: "^Please enter a field label."
+          field_name_length_error: "^The field name must be less than 64 characters in length."
+          size_type_error: "^Max size can only be whole number."
+          field_type_error: "^Please specify a field type."
+          invalid_field_type_error: "^Invalid field type."
     attribute_options:
       opportunity:
         stage:
@@ -834,6 +839,13 @@ en-GB:
   # Views -> Admin -> Custom Fields
   #----------------------------------------------------------------------------
   label: Label
+  field_label: Field label
+  field_type: Field type
+  maxlength: max length
+  hint: hint
+  required: required
+  disabled: disabled
+  placeholder: placeholder
   custom_fields: Custom Fields
   custom_field_options: Custom Field Options
   create_field: Create field

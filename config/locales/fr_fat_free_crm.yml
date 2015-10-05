@@ -160,6 +160,11 @@ fr:
           required: ^%{field} est requis.
           maxlength: ^%{field} est trop long.
           endbeforestart: ^%{field} ne peut pas finir avoir d'avoir démarré.
+          field_label_error: "^Veuillez entrer un label de champ."
+          field_name_length_error: "^Le nom du champ ne doit pas faire plus de 64 caractères."
+          size_type_error: "^La taille maximale doit être un entier."
+          field_type_error: "^Veuillez spécifier un type de champ."
+          invalid_field_type_error: "^Type de champ invalide."
     attribute_options:
       opportunity:
         stage:
@@ -837,6 +842,13 @@ fr:
   # Views -> Admin -> Custom Fields
   #----------------------------------------------------------------------------
   label: Etiquette
+  field_label: Label du champ
+  field_type: Type du champ
+  maxlength: Taille max
+  hint: Indice
+  required: Requis
+  disabled: Désactivé
+  placeholder: placeholder
   custom_fields: Champs personnalisés
   custom_field_options: Options des champs personnalisés
   create_field: Créer un champ

@@ -56,11 +56,11 @@ class Field < ActiveRecord::Base
     'float'       => { klass: 'CustomField', type: 'float' }
   }.with_indifferent_access
 
-  validates_presence_of :label, message: "^Please enter a field label."
-  validates_length_of :label, maximum: 64, message: "^The field name must be less than 64 characters in length."
-  validates_numericality_of :maxlength, only_integer: true, allow_blank: true, message: "^Max size can only be whole number."
-  validates_presence_of :as, message: "^Please specify a field type."
-  validates_inclusion_of :as, in: proc { field_types.keys }, message: "^Invalid field type.", allow_blank: true
+  validates_presence_of :label, message: I18n.translate('activerecord.errors.models.custom_field.field_label_error')
+  validates_length_of :label, maximum: 64, message: I18n.translate('activerecord.errors.models.custom_field.field_name_length_error')
+  validates_numericality_of :maxlength, only_integer: true, allow_blank: true, message: I18n.translate('activerecord.errors.models.custom_field.size_type_error')
+  validates_presence_of :as, message: I18n.translate('activerecord.errors.models.custom_field.field_type_error')
+  validates_inclusion_of :as, in: proc { field_types.keys }, message: I18n.translate('activerecord.errors.models.custom_field.invalid_field_type_error'), allow_blank: true
 
   def column_type(field_type = as)
     (opts = Field.field_types[field_type]) ? opts[:type] : fail("Unknown field_type: #{field_type}")
