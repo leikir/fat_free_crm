@@ -5,7 +5,10 @@
 #------------------------------------------------------------------------------
 ActionController::Renderers.add :csv do |objects, options|
   filename = options[:filename] || controller_name || 'data'
-  str = FatFreeCRM::ExportCSV.from_array(objects)
-  send_data str, type: :csv,
-                 disposition: "attachment; filename=#{filename}.csv"
+  headers["Content-Type"] = "text/csv"
+  headers["Content-disposition"] = "attachment; filename=\"#{filename}.csv\""
+  headers['X-Accel-Buffering'] = 'no'
+  headers["Cache-Control"] ||= "no-cache"
+  headers.delete("Content-Length")
+  self.response_body = FatFreeCRM::ExportCSV.from_array(objects)
 end
