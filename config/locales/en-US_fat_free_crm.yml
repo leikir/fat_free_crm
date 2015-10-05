@@ -629,6 +629,7 @@ en-US:
   select_lead: Select Lead
   select_task: Select Task
   select_opportunity: Select Opportunity
+  search: Search
   search_assets: Search %{value}
   time_ago: ! '%{value} ago'
   background_info: Background

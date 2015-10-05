@@ -11,6 +11,8 @@ fr:
     value: "valeur"
     condition: "condition"
     sort: "tri"
+    submit: Rechercher
+    add_group: Ajouter un groupe ou filtre
     asc: "ascendant"
     desc: "descendant"
     group_first: Montrer résultats correspondant à %{combinator} des paramètres suivants
