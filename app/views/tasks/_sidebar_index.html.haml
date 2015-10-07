@@ -15,4 +15,4 @@
   .check_box
     %div{:style => "float:right;"}
       %b= @task_total[:all]
-    %b== #{t(:total_tasks, t(@view + '_tasks'))}
+    %b== #{t(:total_tasks, t(@view + '_tasks').downcase)}

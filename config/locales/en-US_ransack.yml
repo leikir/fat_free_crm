@@ -15,6 +15,7 @@ en-US:
     asc: ascending
     desc: descending
     submit: Search
+    sort_by: Sort by
     add_group: Add a group of filters
     group_first: Show results where %{combinator} of the following match
     group_rest: ! '...and where %{combinator} of the following match'

@@ -160,7 +160,7 @@ en-US:
           required: ^%{field} is required.
           maxlength: ^%{field} is too long.
           endbeforestart: ^%{field} cannot end before it begins.
-          field_label_error: "^Please enter a field label."
+          field_label_error: "^Please enter a field Label."
           field_name_length_error: "^The field name must be less than 64 characters in length."
           size_type_error: "^Max size can only be whole number."
           field_type_error: "^Please specify a field type."

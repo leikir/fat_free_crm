@@ -4,8 +4,8 @@ fr:
     predicate: "prédicat"
     and: "et"
     or: "ou"
-    any: "au moins un"
-    all: "tous"
+    any: "au moins un(e)"
+    all: "tou(te)s"
     combinator: "combinateur"
     attribute: "attribut"
     value: "valeur"
@@ -13,8 +13,9 @@ fr:
     sort: "tri"
     submit: Rechercher
     add_group: Ajouter un groupe ou filtre
-    asc: "ascendant"
-    desc: "descendant"
+    asc: "croissant"
+    desc: "décroissant"
+    sort_by: "trier par"
     group_first: Montrer résultats correspondant à %{combinator} des paramètres suivants
     group_rest: ! '...et correspondant à %{combinator} des paramètres suivants'
     add_condition: Ajouter un filtre
@@ -24,14 +25,14 @@ fr:
       eq_any: "égal à au moins un"
       eq_all: "égal à tous"
       not_eq: "différent de"
-      not_eq_any: "différent d'au moins un"
+      not_eq_any: "différent d'au moins une"
       not_eq_all: "différent de tous"
       matches: "correspond à"
-      matches_any: "correspond à au moins un"
+      matches_any: "correspond à au moins une"
       matches_all: "correspond à tous"
       does_not_match: "ne correspond pas à"
-      does_not_match_any: "ne correspond pas à au moins un"
-      does_not_match_all: "ne correspond à aucun"
+      does_not_match_any: "ne correspond pas à au moins une"
+      does_not_match_all: "ne correspond à aucune"
       lt: "inférieur à"
       lt_any: "inférieur à au moins un"
       lt_all: "inférieur à tous"

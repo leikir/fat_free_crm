@@ -193,15 +193,15 @@ fr:
   msg_account_created: Votre compte a été créé, il est en attente d'approbation par
     system administrator.
   msg_account_not_approved: Votre compte n'a pas encore été approuvé.
-  msg_asset_deleted: ! '%{value} a été supprimé.'
-  msg_asset_not_available: Ce %{value} n'est plus disponible.
+  msg_asset_deleted: ! '%{value} a été supprimé(e).'
+  msg_asset_not_available: Ce(tte) %{value} n'est plus disponible.
   msg_asset_rejected: ! '%{value} à été rejetée.'
   msg_bad_image_file: ^Nous n'avons pas pu télécharger ou redimensionner votre image.
-  msg_cant_create_related: Impossible de crée le %{asset} puisque le %{related} n'est
-    plus disponnible.
+  msg_cant_create_related: Impossible de créer le/la %{asset} puisque le/la %{related} n'est
+    plus disponible.
   msg_cant_delete_user: ^Impossible de supprimer l'utilisateur car %{value} a des
     objets liés encore présents.
-  msg_cant_do: Impossible de %{action} le %{asset} puisqu'il n'est plus disponible.
+  msg_cant_do: Impossible de %{action} le/la %{asset} puisqu'il/elle n'est plus disponible.
   msg_email_not_found: Aucun utilisateur ne correspond a cette adresse
   msg_enter_new_password: Saisissez votre nouveau mot de passe.
   msg_goodbye: Vous avez été déconnecté, merci d'utiliser Fat Free CRM!
@@ -219,7 +219,7 @@ fr:
   msg_successful_signup: Enregistrement réussi. Bienvenu dans Fat Free CRM
   msg_welcome: Bienvenue dans Fat Free CRM
   msg_not_authorized: Vous n'êtes pas authorisé à réaliser cette action.
-  msg_assets_not_available: Le %{value} n'est pas disponible.
+  msg_assets_not_available: Le/La %{value} n'est pas disponible.
 
   # Options.
   #----------------------------------------------------------------------------
@@ -317,13 +317,14 @@ fr:
   select_an_account: Sélectionner un compte
   account_small: compte
   account_summary: Résumé du compte
-  account_categories: Catégories de compte
+  account_categories: Catégories
   accounts: Comptes
   accounts_options: Options des comptes
   accounts_small: comptes
   assigned_to: Assigné à
   billing_address: Adresse de facturation
   create_account: Créer un compte
+  account_confirm_delete: Êtes-vous certain de vouloir supprimer ce compte ?
   date_created: Date de création
   date_updated: Date de modification
   fax: Fax
@@ -584,13 +585,13 @@ fr:
   all_events_past_participle: Activités
   action_create_comment: ! '- &quot;%{comment}&quot;'
   my_tasks: Mes tâches
-  no_task_records: Vous n'avez pas de tâche.
+  no_task_records: Aucune tâche ne vous est assignée.
   my_opportunities: Mes opportunités
-  no_opportunity_records: Vous n'avez pas d'opportunité.
+  no_opportunity_records: Aucune opportunité ne vous est assignée.
   my_accounts: Mes comptes
   my_leads: Mes leads
-  no_lead_records: Vous n'avez pas de lead.
-  no_account_records: Vous n'avez pas de compte.
+  no_lead_records: Aucun lead ne vous est assigné.
+  no_account_records: Aucun compte ne vous est assigné.
   not_showing_hidden_entities: ! '%{count} %{entity} cachées.'
 
   # Views -> Common.
@@ -599,26 +600,26 @@ fr:
   save_note: Enregistrer la note
   add_note_help: Ajouter une nouvelle note...
   edit_note: Modifier la note
-  added_ago: ajoutée il y a %{value}
-  added_by: ajoutée il y a %{time_ago} par %{user}
+  added_ago: ajouté(e) %{value}
+  added_by: ajouté(e) %{time_ago} par %{user}
   back: Retour
   cancel: Annuler
   close_form: Fermer le formulaire
   comment_intro: Vous pouvez rajouter des commentaires plus tard.
-  confirm_delete: ! 'Êtes-vous certain de vouloir supprimer ceci : %{value}?'
+  confirm_delete: ! 'Êtes-vous certain de vouloir supprimer ce(tte) %{value}?'
   copy_permissions: Copier les permissions de %{value}
   could_not_find: ! 'Aucun(e) %{value} n''a été trouvé(e). N''hésitez pas à '
   could_not_find_matching: Aucun(e) %{value} n'a été trouvé(e) correspondant à
   create_new: créer
   create_a_new: créer
   select_existing: sélectionnez
-  delete: Suppression
+  delete: Supprimer
   discard: Abandon
-  edit: Modification
+  edit: Modifier
   update: Mise à jour
-  destroy: Suppression
-  view: Consultation
-  create: Création
+  destroy: Supprimer
+  view: Consulter
+  create: Créer
   items_total: ! '%{count} total.'
   less: Moins...
   me: moi
@@ -630,13 +631,12 @@ fr:
   options: Options
   permissions: Permissions
   please_retry: essayez une autre requête.
-  recent_items: Objets récents
-  select_contact: Choisir un contact
+  recent_items: Consultés récemment
   select_lead: Choisir une piste
   select_task: Choisir une tâche
   select_opportunity: Choisir une opportunité
   search: Rechercher
-  search_assets: Recherche de %{value}
+  search_assets: Rechercher des %{value}
   time_ago: il y a %{value}
   background_info: Informations
   address: Adresse
@@ -683,7 +683,7 @@ fr:
   comment: Commentaire
   edit_comment: Modifier le commentaire
   show: Voir
-  update: Modification
+  update: Modifier
   following_users_will_be_notified: Les utilisateurs suivants seront notifiés par email
   notifications_tooltip: Les utilisateurs abonnés recevront les nouveaux commentaires par email
   subscribe_via_email: S'abonner par email
@@ -711,6 +711,7 @@ fr:
   create_group: Créer un groupe
   save_group: Enregistrer le groupe
   group_members: membres
+  group: Groupe
   groups: Groupes
   groups_small: groupes
   group_small: groupe
@@ -724,9 +725,9 @@ fr:
   last_logged_in: dernière connexion %{value}
   personal_information: Informations complémentaires
   group_memberships: Groupes
-  reactivate: Réactiver
+  reactivate: Débloquer
   save_user: Enregistrer l'utilisateur
-  suspend: Suspendre
+  suspend: Bloquer
   user_active: Actif
   user_admin: Admin
   user_awaits_approval: en attente de votre approbation
@@ -811,8 +812,8 @@ fr:
       one: 1 jour
       other: ! '%{count} jours'
     login:
-      one: 1 identifiant
-      other: ! '%{count} identifiants'
+      one: 1 connexion
+      other: ! '%{count} connexions'
 
   # Custom date/time formats.
   #----------------------------------------------------------------------------

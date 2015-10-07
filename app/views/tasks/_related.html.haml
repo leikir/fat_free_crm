@@ -18,7 +18,7 @@
           = t(:task_completed_ago, distance_of_time_in_words(related.completed_at, Time.now))
       - elsif related.bucket == "due_asap"
         %span.urgent
-        == #{t :due_now}.
+        == #{t :task_due_now}.
       - elsif related.bucket == "due_later"
         == #{t :due_later}.
       - elsif related.due_at < Date.today

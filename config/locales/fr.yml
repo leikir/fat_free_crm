@@ -197,6 +197,65 @@ fr:
         other: ! 'Impossible d''enregistrer ce %{model} : %{count} erreurs'
       body: ! 'Veuillez vérifier les champs suivants : '
   activerecord:
+    models:
+      company:
+        one: Entreprise
+        other: Entreprises
+      area:
+        one: Zone
+        other: Zones
+      area_near_area:
+        one: Zone adjacente
+        other: Zones adjacentes
+      account:
+        one: Compte
+        other: Comptes
+      campaign:
+        one: Campagne
+        other: Campagnes
+      naf_code:
+        one: Code NAF
+        other: Codes NAF
+      activity_sector:
+        one: "Secteur d'activité"
+        other: "Secteurs d'activité"
+      application:
+        one: Candidature
+        other: Candidatures
+      profile:
+        one: Profil
+        other: Profils
+      comment:
+        one: Commentaire
+        other: Commentaires
+      selection_campaign:
+        one: Campagne de sélection
+        other: Campagnes de sélection
+      profession_counter:
+        one: Décompte professions
+        other: Décomptes professions
+      profession_cart_counter:
+        one:
+        other:
+      company_profile:
+        one: Profil Entreprise
+        other: Profils Entreprise
+      cart:
+        one: Panier
+        other: Paniers
+      task:
+        one: Tâche
+        other: Tâches
+      address:
+        one: Addresse
+        other: Addresses
+      opportunity:
+        one: Opportunité
+        other: Opportunités
+      user:
+        one: Utilisateur
+        other: Utilisateurs
+
     errors:
       messages:
         inclusion: n'est pas inclus(e) dans la liste

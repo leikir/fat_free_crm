@@ -209,7 +209,7 @@ class ApplicationController < ActionController::Base
 
   #----------------------------------------------------------------------------
   def respond_to_not_found(*_types)
-    flash[:warning] = t(:msg_asset_not_available, asset)
+    flash[:warning] = t(:msg_asset_not_available, I18n.t(asset).downcase)
 
     respond_to do |format|
       format.html { redirect_to(redirection_url) }
