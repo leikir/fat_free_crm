@@ -845,8 +845,8 @@ fr:
   restrict_by_tag: Restriction par tag
   restrict_by_tag_info: Cette section ne sera visible que pour les %{assets} qui seront
     taggé(e)s"
-  restrict_by_user_category: Restriction par catégorie d'utilisateur
-  restrict_by_category_info: (Cette section ne sera visible que pour les groupes d'utilisateurs suivants)
+  restrict_by_account_category: Restriction par catégorie de compte
+  restrict_by_category_info: (Cette section ne sera visible que pour les catégories suivantes)
   field_group_tag_restriction: Cette section est visible pour les %{assets} qui sont
     taggé(e)s "%{tag}"
   field_group_unrestricted: Cette section est visible pour l'ensemble des %{assets}

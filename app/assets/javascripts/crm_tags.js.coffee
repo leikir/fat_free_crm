@@ -11,7 +11,7 @@
     url      = $(this).data('url')
     asset_id = $(this).data('asset-id')
 
-    if $(this).attr('name') == 'account[tag_list]'
+    if $(this).attr('name') is 'account[tag_list]'
       category = $(this).closest("form").find("[name='account[category]']").val()
     else
       category = null

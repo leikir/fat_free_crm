@@ -10,11 +10,11 @@
     old_value = $(this).data("previous")
 
     # remove old section(s) if old category is not "other"
-    if old_value != ""
-      $("#field_groups div[data-category='" + old_value + "']").remove()
+    if old_value isnt ""
+      $("#field_groups div[data-category='#{old_value}']").remove()
 
     # add new section(s) if new category is not "other"
-    if new_value != ""
+    if new_value isnt ""
       url      = $(this).data('url')
       asset_id = $(this).data('asset-id')
       $.get(url, {

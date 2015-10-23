@@ -57,7 +57,7 @@ module FatFreeCRM
       def field_groups
         field_groups = self.class.field_groups
         field_groups = respond_to?(:tag_ids) ? field_groups.with_tags(tag_ids) : field_groups
-        respond_to?(:category) ? field_groups.with_categories(['', category].flatten) : field_groups
+        respond_to?(:category) ? field_groups.with_categories(['', category]) : field_groups
       end
 
       # run custom field validations on this object

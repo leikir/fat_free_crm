@@ -15,6 +15,6 @@
       - if f.object.klass_name.downcase == 'account'
         %td
           .label.top
-            =t(:restrict_by_user_category)
+            =t(:restrict_by_account_category)
             %small= t(:restrict_by_category_info)
           = f.select :category_key, Setting.unroll(:account_category), :include_blank => true
