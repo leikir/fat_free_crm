@@ -81,20 +81,32 @@ class EntitiesController < ApplicationController
 
   #----------------------------------------------------------------------------
   def field_group
-    if params[:tag] && @tag = Tag.find_by_name(params[:tag].strip)
-      @field_groups = FieldGroup.where(tag_id: @tag.id, klass_name: klass.to_s).to_a
-      if @field_groups.any?
-        @asset = klass.find_by_id(params[:asset_id]) || klass.new
-        render('fields/groups') && return
-      end
+
+    if params[:tag].present?
+      tag_id = Tag.where(name: params[:tag].strip.split(',')).pluck('id')
+    else
+      tag_id = nil
     end
-    if params[:category]
-      @field_groups = FieldGroup.where(category_key: params[:category]).to_a
-      if @field_groups.any?
-        @asset = klass.find_by_id(params[:asset_id]) || klass.new
-        render('fields/groups') && return
-      end
+
+    category = params[:category]
+
+    if params[:fromCat] == 'true'
+      tag_id = [tag_id, nil].flatten
+    elsif params[:fromTag] == 'true'
+      category = [category, '', nil].flatten
     end
+
+    if klass.to_s == "Account"
+      @field_groups = FieldGroup.where(tag_id: tag_id, category_key: category, klass_name: klass.to_s).to_a
+    else
+      @field_groups = FieldGroup.where(tag_id: tag_id, klass_name: klass.to_s).to_a
+    end
+
+    if @field_groups.any?
+      @asset = klass.find_by_id(params[:asset_id]) || klass.new
+      render('fields/groups') && return
+    end
+
     render text: ''
   end
 

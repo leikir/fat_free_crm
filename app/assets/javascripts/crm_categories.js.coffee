@@ -8,19 +8,22 @@
   $(document).on 'change', "[name='account[category]']", (event) ->
     new_value = $(this).val()
     old_value = $(this).data("previous")
-    console.log 'change from', old_value, 'to', new_value
 
-    # remove old section(s)
-    $("#field_groups div[data-category='" + old_value + "']").remove()
+    # remove old section(s) if old category is not "other"
+    if old_value != ""
+      $("#field_groups div[data-category='" + old_value + "']").remove()
 
-    # add new section(s)
-    url      = $(this).data('url')
-    asset_id = $(this).data('asset-id')
-    $.get(url, {
-      category: new_value
-      asset_id: asset_id
-      collapsed: "no"
-    })
+    # add new section(s) if new category is not "other"
+    if new_value != ""
+      url      = $(this).data('url')
+      asset_id = $(this).data('asset-id')
+      $.get(url, {
+        tag: $(this).closest("form").find("[name='account[tag_list]']").val()
+        fromCat: true
+        category: new_value
+        asset_id: asset_id
+        collapsed: "no"
+      })
 
     # remember the change
     $(this).data("previous", $(this).val())

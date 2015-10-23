@@ -10,8 +10,16 @@
   $(document).on 'select2-selecting', "[name*='tag_list']", (event) ->
     url      = $(this).data('url')
     asset_id = $(this).data('asset-id')
+
+    if $(this).attr('name') == 'account[tag_list]'
+      category = $(this).closest("form").find("[name='account[category]']").val()
+    else
+      category = null
+
     $.get(url, {
       tag: event.val
+      fromTag: true
+      category: category
       asset_id: asset_id
       collapsed: "no"
     })
