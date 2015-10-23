@@ -81,18 +81,32 @@ class EntitiesController < ApplicationController
 
   #----------------------------------------------------------------------------
   def field_group
-    if params[:tag] && @tag = Tag.find_by_name(params[:tag].strip)
-      if @field_group = FieldGroup.find_by_tag_id_and_klass_name(@tag.id, klass.to_s)
-        @asset = klass.find_by_id(params[:asset_id]) || klass.new
-        render('fields/group') && return
-      end
+
+    if params[:tag].present?
+      tag_id = Tag.where(name: params[:tag].strip.split(',')).pluck('id')
+    else
+      tag_id = nil
     end
-    if params[:category]
-      if @field_group = FieldGroup.find_by_category_key(params[:category])
-        @asset = klass.find_by_id(params[:asset_id]) || klass.new
-        render('fields/group') && return
-      end
+
+    category = params[:category]
+
+    if params[:fromCat] == 'true'
+      tag_id = [tag_id, nil].flatten
+    elsif params[:fromTag] == 'true'
+      category = [category, '', nil].flatten
     end
+
+    if klass.to_s == "Account"
+      @field_groups = FieldGroup.where(tag_id: tag_id, category_key: category, klass_name: klass.to_s).to_a
+    else
+      @field_groups = FieldGroup.where(tag_id: tag_id, klass_name: klass.to_s).to_a
+    end
+
+    if @field_groups.any?
+      @asset = klass.find_by_id(params[:asset_id]) || klass.new
+      render('fields/groups') && return
+    end
+
     render text: ''
   end
 
@@ -120,7 +134,6 @@ class EntitiesController < ApplicationController
 
   def set_options
     unless params[:cancel].true?
-      klass = controller_name.classify.constantize
       @per_page = current_user.pref[:"#{controller_name}_per_page"] || klass.per_page
       @sort_by  = current_user.pref[:"#{controller_name}_sort_by"]  || klass.sort_by
     end
@@ -131,6 +144,11 @@ class EntitiesController < ApplicationController
   end
 
   private
+
+  #----------------------------------------------------------------------------
+  def klass
+    @klass ||= controller_path.classify.constantize
+  end
 
   def ransack_search
     @ransack_search ||= load_ransack_search
