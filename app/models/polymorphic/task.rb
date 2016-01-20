@@ -87,6 +87,10 @@ class Task < ActiveRecord::Base
   scope :due_tomorrow,  -> { where('due_at >= ? AND due_at < ?', Time.zone.now.midnight.tomorrow.utc, Time.zone.now.midnight.tomorrow.utc + 1.day).order('tasks.id DESC') }
   scope :due_this_week, -> { where('due_at >= ? AND due_at < ?', Time.zone.now.midnight.tomorrow.utc + 1.day, Time.zone.now.next_week.utc).order('tasks.id DESC') }
   scope :due_next_week, -> { where('due_at >= ? AND due_at < ?', Time.zone.now.next_week.utc, Time.zone.now.next_week.end_of_week.utc + 1.day).order('tasks.id DESC') }
+  scope :due_one_month_from_now, -> {
+    _day = Time.zone.now.midnight + 1.month
+    where('due_at >= ? AND due_at < ?', _day.utc, _day.utc + 1.day).order('tasks.id DESC')
+  }
   scope :due_later,     -> { where("(due_at IS NULL AND bucket = 'due_later') OR due_at >= ?", Time.zone.now.next_week.end_of_week.utc + 1.day).order('tasks.id DESC') }
 
   # Completion time scopes.
@@ -162,6 +166,8 @@ class Task < ActiveRecord::Base
       "due_this_week"
     when due_next_week?
       "due_next_week"
+    when due_one_month_from_now?
+      "due_one_month_from_now"
     else
       "due_later"
     end
@@ -216,6 +222,8 @@ class Task < ActiveRecord::Base
       Time.zone.now.end_of_week
     when "due_next_week"
       Time.zone.now.next_week.end_of_week
+    when "due_one_month_from_now"
+      Time.zone.now.midnight + 1.month
     when "due_later"
       Time.zone.now.midnight + 100.years
     when "specific_time"
@@ -258,6 +266,12 @@ class Task < ActiveRecord::Base
   #----------------------------------------------------------------------------
   def due_next_week?
     due_at.between?(Time.zone.now.next_week, Time.zone.now.next_week.end_of_week)
+  end
+
+  #----------------------------------------------------------------------------
+  def due_one_month_from_now?
+    _day = Time.zone.now.midnight + 1.month
+    due_at.between?(_day, _day.end_of_day)
   end
 
   #----------------------------------------------------------------------------

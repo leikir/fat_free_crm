@@ -390,6 +390,7 @@ task_bucket:
   - :due_tomorrow
   - :due_this_week
   - :due_next_week
+  - :due_one_month_from_now
   - :due_later
 
 task_completed:
