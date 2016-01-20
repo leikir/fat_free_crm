@@ -174,13 +174,13 @@ class EntitiesController < ApplicationController
     scope = scope.text_search(query)              if query.present?
     scope = scope.tagged_with(tags, on: :tags) if tags.present?
 
+    @search_results_count = scope.count
+
     # Ignore this order when doing advanced search
     unless advanced_search
       order = current_user.pref[:"#{controller_name}_sort_by"] || klass.sort_by
       scope = scope.order(order)
     end
-
-    @search_results_count = scope.count
 
     # Pagination is disabled for xls and csv requests
     unless wants.xls? || wants.csv?
