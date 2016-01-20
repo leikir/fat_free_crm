@@ -1,5 +1,5 @@
 = image_tag("loading.gif", size: 'thumb', class: "spinner", style: "display: none;")
-= paginate
+= paginate(total_entries: @search_results_count)
 
 .per_page_options
   %span.per_page_label
