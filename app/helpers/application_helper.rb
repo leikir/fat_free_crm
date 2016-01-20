@@ -115,6 +115,10 @@ module ApplicationHelper
     content_tag(:span, "&#9658;".html_safe, id: "#{id}_arrow", class: :arrow)
   end
 
+  def path_to_new(options = {})
+    url_for(controller: controller.controller_path, action: :new, only_path: true)
+  end
+
   #----------------------------------------------------------------------------
   def link_to_edit(record, options = {})
     object = record.is_a?(Array) ? record.last : record
