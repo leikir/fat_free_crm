@@ -163,7 +163,7 @@ class EntitiesController < ApplicationController
     advanced_search = params[:q].present?
     wants = request.format
 
-    scope = entities.merge(ransack_search.result(distinct: true))
+    scope = entities.merge(ransack_search.result)#(distinct: true))
 
     # Get filter from session, unless running an advanced search
     unless advanced_search
