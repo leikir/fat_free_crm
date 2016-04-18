@@ -8,7 +8,7 @@ Ransack.configure do |config|
     compounds: true,
     only: [
       :cont, :not_cont, :blank, :present, :true, :false, :eq, :not_eq,
-      :lt, :gt, :null, :not_null, :matches, :does_not_match
+      :lt, :gt, :null, :not_null, :matches, :does_not_match, :start
     ]
   }
 
